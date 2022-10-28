@@ -3,10 +3,11 @@ let mongoose = require("mongoose");
 // create a model class
 let Car = mongoose.Schema(
   {
-    Carname: String,
-    Category: String,
-    Carmodel: String,
-    Price: Number,
+    _id:String,
+    name: String,
+    category: String,
+    model: String,
+    price: Number,
   },
   {
     collection: "cars",

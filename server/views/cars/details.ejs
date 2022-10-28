@@ -1,72 +1,74 @@
 <% include ../partials/header.ejs %>
 
-<!-- MAIN CONTENT -->
 <div class="container">
-  <div class="row">
-    <div class="col-md-offset-3 col-md-6">
-      <h1><%= title %></h1>
-      <form class="form" method="post">
-        <div class="form-group">
-          <label for="NameTextField">Car Name</label>
-          <input
-            type="text"
-            class="form-control"
-            id="NameTextField"
-            placeholder="Car Name"
-            name="Carname"
-            value="<%= cars.Carname %>"
-            required
-          />
-        </div>
 
-        <div class="form-group">
-          <label for="CatTextField">Category</label>
-          <input
-            type="text"
-            class="form-control"
-            id="CatTextField"
-            placeholder="car Category"
-            name="Category"
-            value="<%= cars.Category %>"
-            required
-          />
-        </div>
+    <form class="well form-horizontal" action="/cars/update" method="post"  id="contact_form">
+<fieldset>
 
-        <div class="form-group">
-          <label for="ModelTextField">Car Model</label>
-          <input
-            type="text"
-            class="form-control"
-            id="ModelTextField"
-            placeholder="Car Model"
-            name="Carmodel"
-            value="<%= cars.Carmodel %>"
-            required
-          />
-        </div>
+<!-- Form Name -->
+<legend><center><h2><b><%= title %></b></h2></center></legend><br>
 
-        <div class="form-group">
-          <label for="PriceTextField">Price</label>
-          <input
-            type="text"
-            class="form-control"
-            id="PriceTextField"
-            placeholder="Car Price"
-            name="Price"
-            value="<%= cars.Price %>"
-            required
-          />
-        </div>
+<input type="hidden" name="id" value="<%= car._id %> "/>
 
-        <button type="submit" class="btn btn-primary">
-          <i class="fa fa-check-square-o"></i> Submit
-        </button>
-        <a href="/cars" class="btn btn-warning"
-          ><i class="fa fa-undo"></i> Cancel</a
-        >
-      </form>
+<!-- Text input-->
+
+<div class="form-group">
+  <label class="col-md-4 control-label">Name</label>  
+  <div class="col-md-4 inputGroupContainer">
+  <div class="input-group">
+  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+  <input  name="name" placeholder="name" class="form-control" value="<%=car.name%>" type="text">
     </div>
   </div>
 </div>
+
+
+<!-- Select Basic -->
+  <div class="form-group"> 
+  <label class="col-md-4 control-label">Category</label>
+    <div class="col-md-4 selectContainer">
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+        <input  name="category" placeholder="category" class="form-control" value="<%=car.category%>" type="text">
+  </div>
+</div>
+</div>
+  
+<!-- Text input-->
+
+<div class="form-group">
+  <label class="col-md-4 control-label">Model</label>  
+  <div class="col-md-4 inputGroupContainer">
+  <div class="input-group">
+  <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
+  <input  name="model" placeholder="model" class="form-control" value="<%=car.model%>"  type="text">
+    </div>
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="form-group">
+  <label class="col-md-4 control-label" >Price</label> 
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+  <span class="input-group-addon"><i class="glyphicon glyphicon-credit-card"></i></span>
+  <input name="price" placeholder="price" class="form-control" value="<%=car.price%>"  type="text">
+    </div>
+  </div>
+</div>
+
+<!-- Button -->
+<div class="form-group">
+  <label class="col-md-4 control-label"></label>
+  <div class="col-md-8"><br>
+    <button  class="btn btn-secondary" >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <a href="/cars/list">Return <span class="glyphicon glyphicon-arrow-left"></span></a> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</button>
+    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<button type="submit" class="btn btn-warning" >&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspUPDATE <span class="glyphicon glyphicon-send"></span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</button>
+  </div>
+</div>
+
+</fieldset>
+</form>
+</div>
+    </div><!-- /.container -->
 
 <% include ../partials/footer.ejs %>

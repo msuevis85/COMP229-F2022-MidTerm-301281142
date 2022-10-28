@@ -1,0 +1,85 @@
+<% include ../partials/header.ejs %>
+
+<!-- MAIN CONTENT -->
+<div class="container">
+  <div class="row">
+    <div class="col-md-offset-1 col-md-10">
+      <h3>Favourite Cars List</h3>
+      <!-- ------------------------ -->
+      <!-- FIX THE ADD BUTTON BELOW -->
+      <!-- ------------------------ -->
+      <a href="/cars/add" class="btn btn-primary"
+        ><i class="fa fa-plus"></i> Add a car</a
+      >
+      <br />
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped table-hover">
+          <thead>
+            <tr>
+              <th>Car Name</th>
+              <th class="text-center">Car Model</th>
+              <th class="text-center">Category</th>
+              <th class="text-center">Price</th>
+              <th class="text-center"></th>
+               </tr>
+          </thead>
+          <tbody>
+            <!-- Template Row -->
+            <% for (let count = 0; count < cars.length; count++) { %>
+            <tr>
+              <td class="text-center"><%= cars[count].name %></td>
+              <td class="text-center"><%= cars[count].category %></td>
+              <td class="text-center"><%= cars[count].model %></td>
+              <td class="text-center"><%= cars[count].price %></td>
+
+              <td class="text-center">
+                <!-- ------------------------ -->
+                <!-- EDIT BUTTON -->
+                <!-- ------------------------ -->
+                <a href="/cars/<%= cars[count].id %>" class="btn btn-success btn-sm">
+                  <i class="fa fa-search-plus"></i></a>
+              </td>
+
+              
+            </tr>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+      <!-- ------------------------ -->
+                <!--FIX the DELETE BUTTON HERE -->
+                <!-- ------------------------ -->
+        <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#myModal">  <i class="fa fa-trash-o"></i>&nbspDelete</button>
+    </main>
+      <div class="col-md-offset-1 col-md-10 text-center">
+        <ul class="pagination pagination-lg pager" id="myPager"></ul>
+      </div>
+
+
+      <!-- Modal -->
+      <form  action="/cars/delete" method="post">
+        <div id="myModal" class="modal fade" role="dialog">
+          <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Delete Car</h4>
+                  </div>
+                  <div class="modal-body">
+                    <p>Please write down the name of the car.</p>
+                    <input  name="name" placeholder="name" class="form-control" type="text">
+                  </div>
+                  <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Delete</button>
+                  </div>
+                </div>
+          </div>
+        </div>
+      </form>
+      
+    </div>
+  </div>
+</div>
+
+<% include ../partials/footer.ejs %>
