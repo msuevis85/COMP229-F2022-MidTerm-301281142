@@ -27,7 +27,6 @@ module.exports = {
 
       
       let car = new Cars({
-           _id:crypto.randomUUID,
            name: name,
            category:category,
            model: model,
@@ -47,14 +46,12 @@ module.exports = {
 
    getById:(req, res, next) => {
 
-      let idFind = req.params._id;
-    
-      Cars.findOne({id:idFind}, function (err, car) {
+       let idFind = req.params.id;
+       Cars.findOne({_id:idFind}, function (err, car) {
         if (err){
             console.log(err);
         }
         else{
-            console.log(car);
             res.render("cars/details", { title: "Edit Car Form", car: car,});
         }
 
@@ -65,7 +62,7 @@ module.exports = {
    update:(req, res, next) => {
 
     console.log(req.body);
-       
+    
     const id = req.body.id;
     let name = req.body.name;
     let category = req.body.category;
@@ -73,15 +70,14 @@ module.exports = {
     let price = req.body.price;
 
    
-   let car = new Cars({
-        id: id,
+   const car =({
         name: name,
         category:category,
         model: model,
         price:price,
-    });
+    }); 
 
-    Cars.updateOne(car,function(error, data) {
+    Cars.updateOne({_id:id},car,function(error, data) {
      if(error) {
          console.log(error);
      }
@@ -107,14 +103,16 @@ module.exports = {
    },
 
 
-   delete: (req, res, next) => { console.log("Delete")
-      
-    let name = req.body.name;
-    let car = new Cars({
-        name: name,
-    });
+   delete: (req, res, next) => { 
 
-    Cars.deleteMany(car,function(error, data) {
+    console.log(req.body)
+    
+
+    Cars.deleteMany({ "$or": [ 
+                                {"name" : req.body.name},
+                                { '$and' : [ {"price": {$gt: req.body.lessprice}}, {"price": {$lt: req.body.gtprice}} ] } 
+                             ] 
+                        } ,function(error, data) {
         if(error) {
             console.log(error);
         }
